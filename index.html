@@ -8,79 +8,6 @@
 
 
 <style>
-   /* =========================
-   PARTICULES FIN
-========================= */
-
-.finalParticle{
-
-position:absolute;
-
-width:5px;
-height:5px;
-
-border-radius:50%;
-
-background:#000;
-
-opacity:0;
-
-z-index:150;
-
-animation:finalRise 5s infinite;
-
-}
-
-
-@keyframes finalRise{
-
-
-0%{
-
-transform:
-translateY(100vh)
-scale(.5);
-
-opacity:0;
-
-}
-
-
-
-20%{
-
-opacity:.8;
-
-}
-
-
-
-100%{
-
-transform:
-translateY(-100vh)
-scale(2);
-
-opacity:0;
-
-}
-
-
-}
-
-
-
-/* particules rouges rares */
-
-.finalBlood{
-
-background:#900000;
-
-box-shadow:
-0 0 15px red,
-0 0 30px red;
-
-}
 
 *{
 margin:0;
@@ -1358,7 +1285,7 @@ VERITY
 <div id="code">
 
 
-2BCfkBRHmbhyhrBTaRsDjpnrsqkqsFhvvzfSwEA8UVxcGi9Svi8v8W
+F2dYwGvJ8y6pN7mXQ3tK9vL4sA8rP6zE5cW1hB9uD7oV3
 
 
 </div>
@@ -1675,75 +1602,8 @@ if(verityDestroyed===4){
 setTimeout(()=>{
 
 
-function unlock(){
+unlock();
 
-
-let screen =
-document.getElementById("screen");
-
-
-screen.classList.add("show");
-
-
-
-// création des particules de fin
-
-for(let i=0;i<180;i++){
-
-
-let p=document.createElement("div");
-
-
-p.className="finalParticle";
-
-
-
-if(Math.random() > 0.7){
-
-p.classList.add("finalBlood");
-
-}
-
-
-
-p.style.left=
-Math.random()*100+"%";
-
-
-
-p.style.animationDelay=
-Math.random()*5+"s";
-
-
-
-p.style.animationDuration=
-(3+Math.random()*7)+"s";
-
-
-
-document.body.appendChild(p);
-
-
-}
-
-
-
-
-
-setTimeout(()=>{
-
-
-document
-.getElementById("code")
-.classList.add("show");
-
-
-
-},5000);
-
-
-
-}
 
 
 },1500);
