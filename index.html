@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 
 <meta charset="UTF-8">
 <title>VERITY</title>
+
 
 <style>
 
@@ -20,42 +22,57 @@ height:100vh;
 overflow:hidden;
 
 background:
-radial-gradient(circle at center,
-#180000,
-#050000 55%,
-#000 100%);
+
+radial-gradient(
+circle at center,
+#250000,
+#080000 50%,
+#000 100%
+);
+
 
 display:flex;
 align-items:center;
 justify-content:center;
 
-font-family:"Times New Roman",serif;
+
+font-family:"Courier New",monospace;
+
 
 }
 
 
 
-/* brume */
+/* =========================
+   BRUME
+========================= */
+
 
 body:before{
+
 
 content:"";
 
 position:absolute;
 
-inset:-100px;
+inset:-200px;
+
 
 background:
 
 radial-gradient(
 circle,
-rgba(255,0,0,.06),
+rgba(255,0,0,.08),
 transparent 60%
 );
 
-filter:blur(50px);
 
-animation:fog 20s infinite linear;
+
+filter:blur(60px);
+
+
+animation:fog 25s linear infinite;
+
 
 }
 
@@ -63,106 +80,190 @@ animation:fog 20s infinite linear;
 
 @keyframes fog{
 
+
 from{
+
 transform:rotate(0deg);
+
 }
+
 
 to{
+
 transform:rotate(360deg);
-}
 
 }
 
 
+}
 
 
-/* ombres mouvantes */
+
+
+/* =========================
+   PARTICULES
+========================= */
+
+
+.particle{
+
+
+position:absolute;
+
+
+width:3px;
+
+height:3px;
+
+
+background:#660000;
+
+
+border-radius:50%;
+
+
+opacity:.5;
+
+
+animation:fall linear infinite;
+
+
+}
+
+
+
+@keyframes fall{
+
+
+from{
+
+transform:translateY(-100vh);
+
+}
+
+
+to{
+
+transform:translateY(100vh);
+
+}
+
+
+}
+
+
+
+
+
+/* =========================
+   OMBRE
+========================= */
 
 
 .shadow{
 
+
 position:absolute;
 
-width:600px;
-height:600px;
+
+width:700px;
+
+height:700px;
+
+
+background:black;
+
+
+opacity:.3;
+
 
 border-radius:50%;
 
-background:#000;
 
-opacity:.25;
+filter:blur(100px);
 
-filter:blur(80px);
-
-animation:move 10s infinite alternate;
-
-}
-
-
-@keyframes move{
-
-from{
-transform:translate(-100px);
-}
-
-to{
-transform:translate(100px);
-}
 
 }
 
 
 
 
-/* cercle derrière */
+
+/* =========================
+   VORTEX
+========================= */
 
 
 .vortex{
 
+
 position:absolute;
 
-width:500px;
-height:500px;
+
+width:520px;
+
+height:520px;
+
 
 border-radius:50%;
 
 
+
 background:
 
-radial-gradient(
-circle,
-transparent 40%,
-#240000,
-transparent 70%
+
+conic-gradient(
+
+transparent,
+
+#550000,
+
+transparent,
+
+#150000
+
 );
 
 
-filter:blur(30px);
 
-animation:rotate 12s linear infinite;
+filter:blur(40px);
+
+
+
+animation:spin 15s linear infinite;
+
+
 
 }
 
 
-@keyframes rotate{
+
+@keyframes spin{
+
 
 to{
+
 transform:rotate(360deg);
-}
 
 }
 
 
+}
 
 
 
-/* OEIL REALISTE */
+
+
+/* =========================
+   OEIL
+========================= */
 
 
 .eye{
 
 
 width:260px;
+
 height:260px;
 
 
@@ -175,53 +276,56 @@ position:relative;
 background:
 
 
+
 radial-gradient(circle at 35% 30%,
 
-rgba(255,255,255,.8) 0%,
+rgba(255,255,255,.7),
 
 transparent 8%),
 
 
 radial-gradient(circle,
 
-#000 0%,
+#000,
 
-#050505 18%,
+#100000 25%,
 
-#2b0000 30%,
+#650000 50%,
 
-#850000 45%,
+#220000 75%,
 
-#3a0000 65%,
-
-#050000 100%);
+#000);
 
 
 
 box-shadow:
 
 
-inset 0 0 40px black,
+inset 0 0 50px black,
 
-0 0 60px #500000,
+0 0 80px #700000,
 
-0 0 150px black;
+0 0 200px black;
 
 
 
-transition:.6s;
+transition:.5s;
+
 
 
 animation:breath 5s infinite;
 
+
+
 overflow:hidden;
+
 
 }
 
 
 
-
 @keyframes breath{
+
 
 50%{
 
@@ -229,41 +333,6 @@ transform:scale(1.04);
 
 }
 
-}
-
-
-
-
-/* reflet oeil */
-
-
-.eye:before{
-
-
-content:"";
-
-
-position:absolute;
-
-width:80px;
-height:80px;
-
-
-background:
-
-radial-gradient(circle,
-white,
-transparent);
-
-
-opacity:.25;
-
-
-top:35px;
-left:45px;
-
-
-border-radius:50%;
 
 }
 
@@ -272,7 +341,6 @@ border-radius:50%;
 
 
 /* iris */
-
 
 .eye:after{
 
@@ -283,7 +351,7 @@ content:"";
 position:absolute;
 
 
-inset:25px;
+inset:30px;
 
 
 border-radius:50%;
@@ -291,13 +359,14 @@ border-radius:50%;
 
 background:
 
+
 repeating-conic-gradient(
 
-#ff3300 0deg,
+#ff2200 0deg,
 
-#300000 10deg,
+#300000 12deg,
 
-#ff0000 20deg
+#900000 20deg
 
 );
 
@@ -307,6 +376,44 @@ opacity:.25;
 
 
 }
+
+
+
+/* reflet */
+
+.eye:before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+width:70px;
+
+height:70px;
+
+
+background:white;
+
+
+opacity:.15;
+
+
+border-radius:50%;
+
+
+top:35px;
+
+left:45px;
+
+
+z-index:2;
+
+
+}
+
 
 
 
@@ -342,14 +449,10 @@ top:50%;
 transform:translate(-50%,-50%);
 
 
-box-shadow:
-
-0 0 50px black;
-
+box-shadow:0 0 50px black;
 
 
 }
-
 
 
 
@@ -382,9 +485,9 @@ left:18px;
 
 
 
-
-
-/* VERITY */
+/* =========================
+   VERITY
+========================= */
 
 
 .verity{
@@ -393,31 +496,32 @@ left:18px;
 position:absolute;
 
 
-color:#999;
+color:#aaa;
 
 
-font-size:30px;
-
-
-letter-spacing:12px;
-
-
-cursor:pointer;
+font-size:32px;
 
 
 font-weight:bold;
 
 
-opacity:.7;
+letter-spacing:10px;
+
+
+cursor:pointer;
+
+
+opacity:.75;
 
 
 transition:.5s;
 
 
+
 text-shadow:
 
 
-0 0 5px #000,
+0 0 5px black,
 
 0 0 20px #550000;
 
@@ -427,7 +531,11 @@ animation:flicker 4s infinite;
 
 
 
+user-select:none;
+
+
 }
+
 
 
 
@@ -457,7 +565,7 @@ opacity:1;
 .verity:hover{
 
 
-color:#ff0000;
+color:red;
 
 
 opacity:1;
@@ -466,42 +574,35 @@ opacity:1;
 text-shadow:
 
 
-0 0 10px red,
+0 0 15px red,
 
-0 0 40px red,
-
-0 0 80px red;
+0 0 50px red;
 
 
 }
 
 
+
+
+
+/* positions */
 
 
 .left{
 
+
 left:12%;
 
+
 }
+
 
 
 .right{
 
+
 right:12%;
 
-}
-
-
-.top{
-
-top:25%;
-
-}
-
-
-.bottom{
-
-bottom:25%;
 
 }
 
@@ -509,16 +610,224 @@ bottom:25%;
 
 .center{
 
+
 top:50%;
 
+
 transform:translateY(-50%);
+
+
+}
+
+
+
+.top{
+
+
+top:18%;
+
+
+left:50%;
+
+
+transform:translateX(-50%);
+
+
+}
+
+
+
+.bottom{
+
+
+bottom:18%;
+
+
+left:50%;
+
+
+transform:translateX(-50%);
+
 
 }
 
 
 
 
-/* peur */
+
+/* =========================
+   VERITY DETRUIT
+========================= */
+
+
+.broken{
+
+
+animation:breakWord .8s forwards;
+
+
+pointer-events:none;
+
+
+}
+
+
+
+@keyframes breakWord{
+
+
+0%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+
+
+25%{
+
+
+transform:
+
+translateX(15px)
+
+rotate(5deg);
+
+
+color:red;
+
+
+}
+
+
+
+50%{
+
+
+transform:
+
+translateX(-20px)
+
+rotate(-10deg)
+
+scale(1.3);
+
+
+}
+
+
+
+100%{
+
+
+opacity:0;
+
+
+filter:blur(20px);
+
+
+transform:
+
+scale(2)
+
+translateY(-50px);
+
+
+}
+
+
+}
+
+
+
+
+
+/* morceaux qui explosent */
+
+
+.shard{
+
+
+position:absolute;
+
+
+color:red;
+
+
+font-size:22px;
+
+
+font-weight:bold;
+
+
+pointer-events:none;
+
+
+z-index:20;
+
+
+animation:explode .9s forwards;
+
+
+}
+
+
+
+@keyframes explode{
+
+
+from{
+
+
+opacity:1;
+
+
+transform:
+
+translate(0,0)
+
+rotate(0deg);
+
+
+}
+
+
+
+to{
+
+
+opacity:0;
+
+
+transform:
+
+
+translate(
+
+calc(-150px + 300px * var(--x)),
+
+calc(-150px + 300px * var(--y))
+
+)
+
+rotate(360deg);
+
+
+
+}
+
+
+}
+
+
+
+
+
+/* =========================
+   OEIL REACTION
+========================= */
 
 
 .scared{
@@ -534,12 +843,14 @@ brightness(1.8)
 contrast(1.5);
 
 
+
 box-shadow:
 
 
-0 0 120px red,
+0 0 100px red,
 
-0 0 250px red!important;
+0 0 250px red;
+
 
 
 }
@@ -547,7 +858,10 @@ box-shadow:
 
 
 
-/* final */
+
+/* =========================
+   ECRAN FINAL
+========================= */
 
 
 #screen{
@@ -555,10 +869,12 @@ box-shadow:
 
 position:absolute;
 
+
 inset:0;
 
 
 background:
+
 
 linear-gradient(
 
@@ -569,17 +885,26 @@ white,
 );
 
 
+
 opacity:0;
+
+
+pointer-events:none;
 
 
 display:flex;
 
-align-items:center;
 
 justify-content:center;
 
 
+align-items:center;
+
+
 transition:5s;
+
+
+z-index:50;
 
 
 }
@@ -593,13 +918,13 @@ transition:5s;
 font-family:monospace;
 
 
-font-size:24px;
+font-size:25px;
 
 
-letter-spacing:10px;
+letter-spacing:8px;
 
 
-color:#000;
+color:black;
 
 
 opacity:0;
@@ -608,19 +933,29 @@ opacity:0;
 transition:3s;
 
 
+text-align:center;
+
+
 }
+
+
 
 
 
 .show{
 
+
 opacity:1!important;
+
 
 }
 
 
 
+
+
 </style>
+
 
 </head>
 
@@ -629,36 +964,40 @@ opacity:1!important;
 <body>
 
 
+
 <div class="shadow"></div>
+
 
 <div class="vortex"></div>
 
 
 
+<!-- LES 4 VERITY -->
+
+
 <div class="verity left center"
-onmouseenter="fear(1)"
-onmouseleave="fear(0)">
+onclick="activateVerity(this)">
 VERITY
 </div>
+
 
 
 <div class="verity right center"
-onmouseenter="fear(1)"
-onmouseleave="fear(0)">
+onclick="activateVerity(this)">
 VERITY
 </div>
+
 
 
 <div class="verity top"
-onmouseenter="fear(1)"
-onmouseleave="fear(0)">
+onclick="activateVerity(this)">
 VERITY
 </div>
+
 
 
 <div class="verity bottom"
-onmouseenter="fear(1)"
-onmouseleave="fear(0)">
+onclick="activateVerity(this)">
 VERITY
 </div>
 
@@ -666,9 +1005,11 @@ VERITY
 
 
 
-<div class="eye" onclick="openEye()">
+<div class="eye">
+
 
 <div class="pupil"></div>
+
 
 </div>
 
@@ -677,58 +1018,126 @@ VERITY
 
 <div id="screen">
 
+
 <div id="code">
 
 F2dYwGvJ8y6pN7mXQ3tK9vL4sA8rP6zE5cW1hB9uD7oV3
 
 </div>
 
+
 </div>
-
-
-
 <script>
 
 
-for(let i=0;i<80;i++){
+/* =========================
+   PARTICULES
+========================= */
 
-let p=document.createElement("div");
 
-p.style.position="absolute";
+for(let i = 0; i < 120; i++){
 
-p.style.width="2px";
 
-p.style.height="2px";
+let p = document.createElement("div");
 
-p.style.background="#550000";
+
+p.className="particle";
+
 
 p.style.left=Math.random()*100+"%";
 
+
 p.style.top=Math.random()*100+"%";
+
+
+p.style.animationDuration=
+(4 + Math.random()*10)+"s";
+
 
 p.style.opacity=Math.random();
 
+
 document.body.appendChild(p);
+
 
 }
 
 
 
 
-document.addEventListener("mousemove",e=>{
+
+/* =========================
+   OEIL SUIT LE CURSEUR
+========================= */
 
 
-let p=document.querySelector(".pupil");
+document.addEventListener("mousemove", e=>{
 
 
-let x=(e.clientX/window.innerWidth-.5)*45;
-
-let y=(e.clientY/window.innerHeight-.5)*45;
+let pupil=document.querySelector(".pupil");
 
 
-p.style.marginLeft=x+"px";
+let eye=document.querySelector(".eye");
 
-p.style.marginTop=y+"px";
+
+let rect=eye.getBoundingClientRect();
+
+
+
+let centerX=
+rect.left + rect.width/2;
+
+
+let centerY=
+rect.top + rect.height/2;
+
+
+
+let mouseX=e.clientX-centerX;
+
+let mouseY=e.clientY-centerY;
+
+
+
+let distance=Math.sqrt(
+mouseX*mouseX +
+mouseY*mouseY
+);
+
+
+
+let max=45;
+
+
+
+let moveX=
+(mouseX/distance)*max;
+
+
+
+let moveY=
+(mouseY/distance)*max;
+
+
+
+if(distance < max){
+
+moveX=mouseX;
+
+moveY=mouseY;
+
+}
+
+
+
+pupil.style.transform=
+`
+translate(
+calc(-50% + ${moveX}px),
+calc(-50% + ${moveY}px)
+)
+`;
+
 
 
 });
@@ -737,44 +1146,192 @@ p.style.marginTop=y+"px";
 
 
 
-function fear(x){
-
-let eye=document.querySelector(".eye");
 
 
-if(x){
+/* =========================
+   SYSTEM DES 4 VERITY
+========================= */
 
-eye.classList.add("scared");
+
+let destroyed=0;
+
+
+
+function activateVerity(element){
+
+
+
+// empêcher double clic
+
+if(element.classList.contains("broken")){
+
+return;
 
 }
 
-else{
 
-eye.classList.remove("scared");
 
-}
-
-}
+element.classList.add("broken");
 
 
 
+destroyed++;
 
-function openEye(){
 
 
-document.getElementById("screen")
-.classList.add("show");
+
+
+/* explosion des morceaux */
+
+
+for(let i=0;i<12;i++){
+
+
+
+let shard=document.createElement("div");
+
+
+shard.className="shard";
+
+
+shard.innerHTML="VERITY";
+
+
+
+let rect=
+element.getBoundingClientRect();
+
+
+
+shard.style.left=
+(rect.left + rect.width/2)+"px";
+
+
+shard.style.top=
+(rect.top + rect.height/2)+"px";
+
+
+
+shard.style.setProperty(
+"--x",
+Math.random()
+);
+
+
+
+shard.style.setProperty(
+"--y",
+Math.random()
+);
+
+
+
+document.body.appendChild(shard);
+
 
 
 setTimeout(()=>{
 
+shard.remove();
+
+},1000);
+
+
+
+}
+
+
+
+
+
+/* réaction oeil */
+
+
+let eye=document.querySelector(".eye");
+
+
+eye.classList.add("scared");
+
+
+
+setTimeout(()=>{
+
+
+eye.classList.remove("scared");
+
+
+},700);
+
+
+
+
+
+
+
+/* les 4 trouvés */
+
+
+if(destroyed===4){
+
+
+
+setTimeout(()=>{
+
+
+unlock();
+
+
+
+},1500);
+
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   FIN ARG
+========================= */
+
+
+function unlock(){
+
+
+
+let screen=
+document.getElementById("screen");
+
+
+
+screen.classList.add("show");
+
+
+
+
+setTimeout(()=>{
+
+
 document.getElementById("code")
 .classList.add("show");
+
+
 
 },5000);
 
 
+
 }
+
 
 
 
@@ -782,4 +1339,5 @@ document.getElementById("code")
 
 
 </body>
+
 </html>
