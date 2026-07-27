@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
 <title>Hell's Floor</title>
 
@@ -13,40 +14,58 @@ box-sizing:border-box;
 }
 
 body{
+
 height:100vh;
 overflow:hidden;
+
 background:
-radial-gradient(circle,#5b0000,#170000,#000);
-font-family:monospace;
+radial-gradient(circle at center,
+#300000 0%,
+#0b0000 40%,
+#000 80%);
+
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
+
+font-family:"Courier New",monospace;
+
 }
 
 
-/* VORTEX */
 
-.vortex{
+/* BRUME */
+
+body:before{
+
+content:"";
+
 position:absolute;
-width:800px;
-height:800px;
-border-radius:50%;
+
+width:200%;
+height:200%;
+
 background:
-conic-gradient(
-transparent,
-#ff0000,
-transparent,
-#450000,
-transparent
-);
-filter:blur(40px);
-animation:spin 8s linear infinite;
+radial-gradient(circle,
+rgba(255,0,0,.08),
+transparent 50%);
+
+animation:fog 20s linear infinite;
+
 }
 
 
-@keyframes spin{
-from{transform:rotate(0)}
-to{transform:rotate(360deg)}
+
+@keyframes fog{
+
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+
 }
 
 
@@ -54,12 +73,20 @@ to{transform:rotate(360deg)}
 /* PARTICULES */
 
 .particle{
+
 position:absolute;
-width:4px;
-height:4px;
-background:#000;
+
+width:3px;
+height:3px;
+
+background:#8b0000;
+
 border-radius:50%;
+
+opacity:.5;
+
 animation:fall linear infinite;
+
 }
 
 
@@ -77,62 +104,132 @@ transform:translateY(100vh);
 
 
 
+
+/* CERCLE DERRIERE */
+
+.vortex{
+
+position:absolute;
+
+width:500px;
+height:500px;
+
+border-radius:50%;
+
+
+background:
+conic-gradient(
+transparent,
+#330000,
+transparent,
+#900000,
+transparent
+);
+
+
+filter:blur(35px);
+
+animation:rotate 12s linear infinite;
+
+}
+
+
+@keyframes rotate{
+
+from{
+transform:rotate(0);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+
+
+
 /* OEIL */
+
 
 .eye{
 
-width:360px;
-height:360px;
+width:230px;
+height:230px;
+
 border-radius:50%;
-position:relative;
-overflow:hidden;
-cursor:pointer;
 
 background:
+
 radial-gradient(circle,
-black 0%,
-#050505 18%,
-red 35%,
-orange 55%,
-#220000 80%);
+
+#000 0%,
+#050505 20%,
+#550000 45%,
+#ff4b00 70%,
+#100000 100%);
+
 
 box-shadow:
-0 0 40px red,
-0 0 100px crimson,
-0 0 200px black;
 
-animation:breath 4s infinite;
+0 0 40px #ff0000,
+0 0 100px #700000,
+0 0 180px black;
+
+
+position:relative;
+
+cursor:pointer;
+
+transition:.5s;
+
+
+animation:pulse 4s infinite;
 
 }
 
 
-@keyframes breath{
+
+@keyframes pulse{
 
 50%{
-transform:scale(1.08);
-}
+
+transform:scale(1.05);
 
 }
 
+}
+
+
+
+
+/* PUPILLE */
 
 
 .pupil{
 
 position:absolute;
-width:100px;
-height:100px;
 
-background:black;
+width:65px;
+height:65px;
+
+
+background:#000;
 
 border-radius:50%;
+
 
 top:50%;
 left:50%;
 
+
 transform:translate(-50%,-50%);
 
-box-shadow:
-0 0 40px #000;
+
+box-shadow:0 0 30px black;
+
+
+transition:.2s;
 
 }
 
@@ -144,117 +241,122 @@ content:"";
 
 position:absolute;
 
-width:25px;
-height:25px;
+width:18px;
+height:18px;
 
 background:white;
 
 border-radius:50%;
 
-top:20px;
-left:25px;
+top:12px;
+left:15px;
 
 }
 
 
 
-.vein{
+
+
+/* VERITY */
+
+.word{
 
 position:absolute;
-background:#ff0000;
-width:5px;
-height:170px;
-opacity:.7;
+
+color:#777;
+
+font-size:22px;
+
+letter-spacing:8px;
+
+cursor:pointer;
+
+transition:.4s;
+
+text-shadow:
+0 0 10px black;
+
 
 }
 
 
-.v1{
-left:80px;
-top:0;
-transform:rotate(35deg);
-}
+.word:hover{
 
-.v2{
-right:80px;
-bottom:0;
-transform:rotate(-40deg);
-}
-
-.v3{
-left:170px;
-bottom:-30px;
-transform:rotate(90deg);
-}
-
-
-
-/* FLAMMES */
-
-.fire{
-
-position:absolute;
-bottom:-100px;
-
-width:100%;
-height:200px;
-
-background:
-linear-gradient(
-transparent,
-#ff0000,
-#ff6600
-);
-
-filter:blur(40px);
-
-animation:fire 2s infinite alternate;
-
-}
-
-
-@keyframes fire{
-
-from{
-transform:scaleY(1);
-}
-
-to{
-transform:scaleY(1.5);
-}
-
-}
-
-
-
-/* GLITCH */
-
-.glitch{
-
-position:absolute;
 color:red;
 
-font-size:14px;
+text-shadow:
 
-animation:glitch 1s infinite;
+0 0 15px red,
+0 0 40px red;
 
-}
-
-
-@keyframes glitch{
-
-0%{transform:translate(0)}
-20%{transform:translate(5px)}
-40%{transform:translate(-5px)}
-60%{transform:translate(3px)}
-100%{transform:translate(0)}
 
 }
 
 
 
+.left{
 
-/* ECRAN FINAL */
+right:calc(50% + 180px);
+
+}
+
+
+.right{
+
+left:calc(50% + 180px);
+
+}
+
+
+
+.top{
+
+top:25%;
+
+}
+
+
+
+.bottom{
+
+bottom:25%;
+
+}
+
+
+
+
+
+/* MODE DANGER */
+
+
+.danger{
+
+background:
+
+radial-gradient(circle,
+
+#ff0000,
+#550000,
+#000)!important;
+
+
+transform:scale(.75)!important;
+
+
+box-shadow:
+
+0 0 100px red,
+0 0 200px red!important;
+
+
+}
+
+
+
+
+
+/* TEXTE FINAL */
 
 
 #screen{
@@ -263,8 +365,14 @@ position:absolute;
 
 inset:0;
 
+
 background:
-radial-gradient(circle,#fff,#ddd);
+
+linear-gradient(
+white,
+#ddd
+);
+
 
 opacity:0;
 
@@ -272,29 +380,30 @@ pointer-events:none;
 
 display:flex;
 
-align-items:center;
 justify-content:center;
 
-transition:opacity 5s;
+align-items:center;
+
+transition:5s;
+
 
 }
 
 
-#text{
+
+#message{
+
+color:black;
 
 font-size:25px;
 
 letter-spacing:10px;
 
-color:black;
-
 opacity:0;
 
-max-width:90%;
-
-text-align:center;
 
 }
+
 
 
 
@@ -306,10 +415,36 @@ opacity:1!important;
 
 
 
+
+.glitch{
+
+position:absolute;
+
+color:red;
+
+animation:glitch .5s infinite;
+
+font-size:12px;
+
+}
+
+
+
+@keyframes glitch{
+
+50%{
+
+transform:translateX(5px);
+
+}
+
+}
+
+
+
 </style>
 
 </head>
-
 
 
 <body>
@@ -319,30 +454,64 @@ opacity:1!important;
 <div class="vortex"></div>
 
 
-<div class="fire"></div>
+
+<div class="word left top"
+onmouseenter="fear(true)"
+onmouseleave="fear(false)">
+verity
+</div>
+
+
+<div class="word right top"
+onmouseenter="fear(true)"
+onmouseleave="fear(false)">
+verity
+</div>
 
 
 
-<div class="eye" onclick="openDoor()">
+<div class="word left bottom"
+onmouseenter="fear(true)"
+onmouseleave="fear(false)">
+verity
+</div>
 
 
-<div class="vein v1"></div>
-<div class="vein v2"></div>
-<div class="vein v3"></div>
+
+<div class="word right bottom"
+onmouseenter="fear(true)"
+onmouseleave="fear(false)">
+verity
+</div>
+
+
+
+
+
+<div class="eye" onclick="openEye()">
+
 
 
 <div class="pupil"></div>
 
 
+
 </div>
+
 
 
 
 <div id="screen">
 
-<div id="text"></div>
+<div id="message">
+
+F2dYwGvJ8y6pN7mXQ3tK9vL4sA8rP6zE5cW1hB9uD7oV3
 
 </div>
+
+</div>
+
+
 
 
 
@@ -351,41 +520,50 @@ opacity:1!important;
 
 // particules
 
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
+
 
 let p=document.createElement("div");
 
 p.className="particle";
 
+
 p.style.left=Math.random()*100+"%";
 
-p.style.animationDuration=
-(3+Math.random()*8)+"s";
 
-p.style.opacity=Math.random();
+p.style.animationDuration=
+(4+Math.random()*10)+"s";
+
 
 document.body.appendChild(p);
+
 
 }
 
 
 
+
+
 // oeil suit souris
 
-document.addEventListener(
-"mousemove",
-e=>{
+
+document.addEventListener("mousemove",e=>{
 
 
 let pupil=document.querySelector(".pupil");
 
 
-let x=(e.clientX/window.innerWidth-.5)*40;
-let y=(e.clientY/window.innerHeight-.5)*40;
+let x=(e.clientX/window.innerWidth-.5)*35;
+
+let y=(e.clientY/window.innerHeight-.5)*35;
 
 
-pupil.style.marginLeft=x+"px";
-pupil.style.marginTop=y+"px";
+pupil.style.left=
+"calc(50% + "+x+"px)";
+
+
+pupil.style.top=
+"calc(50% + "+y+"px)";
 
 
 });
@@ -393,21 +571,31 @@ pupil.style.marginTop=y+"px";
 
 
 
-// flash
-
-setInterval(()=>{
-
-document.body.style.filter=
-"brightness(1.5)";
-
-setTimeout(()=>{
-
-document.body.style.filter="";
-
-},80);
 
 
-},Math.random()*5000+3000);
+// verity reaction
+
+
+function fear(state){
+
+
+let eye=document.querySelector(".eye");
+
+
+if(state){
+
+eye.classList.add("danger");
+
+}
+
+else{
+
+eye.classList.remove("danger");
+
+}
+
+
+}
 
 
 
@@ -416,51 +604,19 @@ document.body.style.filter="";
 // ouverture
 
 
-function openDoor(){
+function openEye(){
 
 
-let s=document.getElementById("screen");
-
-let t=document.getElementById("text");
-
-
-s.classList.add("show");
-
-
-
-let msg=
-"F2dYwGvJ8y6pN7mXQ3tK9vL4sA8rP6zE5cW1hB9uD7oV3";
-
-
-let i=0;
+document.getElementById("screen")
+.classList.add("show");
 
 
 setTimeout(()=>{
 
-
-let interval=setInterval(()=>{
-
-
-t.innerHTML+=msg[i];
-
-i++;
-
-
-if(i>=msg.length){
-
-clearInterval(interval);
-
-}
-
-
-},80);
-
-
-
-t.classList.add("show");
+document.getElementById("message")
+.classList.add("show");
 
 },5000);
-
 
 
 }
