@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Hell's Floor</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+overflow:hidden;
+background:
+radial-gradient(circle,#5b0000,#170000,#000);
+font-family:monospace;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+
+/* VORTEX */
+
+.vortex{
+position:absolute;
+width:800px;
+height:800px;
+border-radius:50%;
+background:
+conic-gradient(
+transparent,
+#ff0000,
+transparent,
+#450000,
+transparent
+);
+filter:blur(40px);
+animation:spin 8s linear infinite;
+}
+
+
+@keyframes spin{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
+
+
+
+/* PARTICULES */
+
+.particle{
+position:absolute;
+width:4px;
+height:4px;
+background:#000;
+border-radius:50%;
+animation:fall linear infinite;
+}
+
+
+@keyframes fall{
+
+from{
+transform:translateY(-100vh);
+}
+
+to{
+transform:translateY(100vh);
+}
+
+}
+
+
+
+/* OEIL */
+
+.eye{
+
+width:360px;
+height:360px;
+border-radius:50%;
+position:relative;
+overflow:hidden;
+cursor:pointer;
+
+background:
+radial-gradient(circle,
+black 0%,
+#050505 18%,
+red 35%,
+orange 55%,
+#220000 80%);
+
+box-shadow:
+0 0 40px red,
+0 0 100px crimson,
+0 0 200px black;
+
+animation:breath 4s infinite;
+
+}
+
+
+@keyframes breath{
+
+50%{
+transform:scale(1.08);
+}
+
+}
+
+
+
+.pupil{
+
+position:absolute;
+width:100px;
+height:100px;
+
+background:black;
+
+border-radius:50%;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+box-shadow:
+0 0 40px #000;
+
+}
+
+
+
+.pupil:after{
+
+content:"";
+
+position:absolute;
+
+width:25px;
+height:25px;
+
+background:white;
+
+border-radius:50%;
+
+top:20px;
+left:25px;
+
+}
+
+
+
+.vein{
+
+position:absolute;
+background:#ff0000;
+width:5px;
+height:170px;
+opacity:.7;
+
+}
+
+
+.v1{
+left:80px;
+top:0;
+transform:rotate(35deg);
+}
+
+.v2{
+right:80px;
+bottom:0;
+transform:rotate(-40deg);
+}
+
+.v3{
+left:170px;
+bottom:-30px;
+transform:rotate(90deg);
+}
+
+
+
+/* FLAMMES */
+
+.fire{
+
+position:absolute;
+bottom:-100px;
+
+width:100%;
+height:200px;
+
+background:
+linear-gradient(
+transparent,
+#ff0000,
+#ff6600
+);
+
+filter:blur(40px);
+
+animation:fire 2s infinite alternate;
+
+}
+
+
+@keyframes fire{
+
+from{
+transform:scaleY(1);
+}
+
+to{
+transform:scaleY(1.5);
+}
+
+}
+
+
+
+/* GLITCH */
+
+.glitch{
+
+position:absolute;
+color:red;
+
+font-size:14px;
+
+animation:glitch 1s infinite;
+
+}
+
+
+@keyframes glitch{
+
+0%{transform:translate(0)}
+20%{transform:translate(5px)}
+40%{transform:translate(-5px)}
+60%{transform:translate(3px)}
+100%{transform:translate(0)}
+
+}
+
+
+
+
+/* ECRAN FINAL */
+
+
+#screen{
+
+position:absolute;
+
+inset:0;
+
+background:
+radial-gradient(circle,#fff,#ddd);
+
+opacity:0;
+
+pointer-events:none;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+transition:opacity 5s;
+
+}
+
+
+#text{
+
+font-size:25px;
+
+letter-spacing:10px;
+
+color:black;
+
+opacity:0;
+
+max-width:90%;
+
+text-align:center;
+
+}
+
+
+
+.show{
+
+opacity:1!important;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="vortex"></div>
+
+
+<div class="fire"></div>
+
+
+
+<div class="eye" onclick="openDoor()">
+
+
+<div class="vein v1"></div>
+<div class="vein v2"></div>
+<div class="vein v3"></div>
+
+
+<div class="pupil"></div>
+
+
+</div>
+
+
+
+<div id="screen">
+
+<div id="text"></div>
+
+</div>
+
+
+
+<script>
+
+
+// particules
+
+for(let i=0;i<80;i++){
+
+let p=document.createElement("div");
+
+p.className="particle";
+
+p.style.left=Math.random()*100+"%";
+
+p.style.animationDuration=
+(3+Math.random()*8)+"s";
+
+p.style.opacity=Math.random();
+
+document.body.appendChild(p);
+
+}
+
+
+
+// oeil suit souris
+
+document.addEventListener(
+"mousemove",
+e=>{
+
+
+let pupil=document.querySelector(".pupil");
+
+
+let x=(e.clientX/window.innerWidth-.5)*40;
+let y=(e.clientY/window.innerHeight-.5)*40;
+
+
+pupil.style.marginLeft=x+"px";
+pupil.style.marginTop=y+"px";
+
+
+});
+
+
+
+
+// flash
+
+setInterval(()=>{
+
+document.body.style.filter=
+"brightness(1.5)";
+
+setTimeout(()=>{
+
+document.body.style.filter="";
+
+},80);
+
+
+},Math.random()*5000+3000);
+
+
+
+
+
+// ouverture
+
+
+function openDoor(){
+
+
+let s=document.getElementById("screen");
+
+let t=document.getElementById("text");
+
+
+s.classList.add("show");
+
+
+
+let msg=
+"F2dYwGvJ8y6pN7mXQ3tK9vL4sA8rP6zE5cW1hB9uD7oV3";
+
+
+let i=0;
+
+
+setTimeout(()=>{
+
+
+let interval=setInterval(()=>{
+
+
+t.innerHTML+=msg[i];
+
+i++;
+
+
+if(i>=msg.length){
+
+clearInterval(interval);
+
+}
+
+
+},80);
+
+
+
+t.classList.add("show");
+
+},5000);
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
