@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+
 <meta charset="UTF-8">
 <title>VERITY</title>
 
@@ -20,21 +21,21 @@ overflow:hidden;
 
 background:
 radial-gradient(circle at center,
-#250000,
-#080000 50%,
-#000 90%);
+#180000,
+#050000 55%,
+#000 100%);
 
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 
-font-family:"Courier New",monospace;
+font-family:"Times New Roman",serif;
 
 }
 
 
 
-/* brouillard */
+/* brume */
 
 body:before{
 
@@ -42,19 +43,29 @@ content:"";
 
 position:absolute;
 
-inset:-50%;
+inset:-100px;
 
 background:
-radial-gradient(circle,
-rgba(255,0,0,.08),
-transparent 45%);
 
-animation:fog 15s linear infinite;
+radial-gradient(
+circle,
+rgba(255,0,0,.06),
+transparent 60%
+);
+
+filter:blur(50px);
+
+animation:fog 20s infinite linear;
 
 }
 
 
+
 @keyframes fog{
+
+from{
+transform:rotate(0deg);
+}
 
 to{
 transform:rotate(360deg);
@@ -65,33 +76,37 @@ transform:rotate(360deg);
 
 
 
+/* ombres mouvantes */
 
-/* particules */
 
-.particle{
+.shadow{
 
 position:absolute;
 
-width:3px;
-height:3px;
-
-background:#660000;
+width:600px;
+height:600px;
 
 border-radius:50%;
 
-animation:fall linear infinite;
+background:#000;
+
+opacity:.25;
+
+filter:blur(80px);
+
+animation:move 10s infinite alternate;
 
 }
 
 
-@keyframes fall{
+@keyframes move{
 
 from{
-transform:translateY(-100vh);
+transform:translate(-100px);
 }
 
 to{
-transform:translateY(100vh);
+transform:translate(100px);
 }
 
 }
@@ -99,35 +114,37 @@ transform:translateY(100vh);
 
 
 
+/* cercle derrière */
 
-/* vortex */
 
 .vortex{
 
 position:absolute;
 
-width:450px;
-height:450px;
+width:500px;
+height:500px;
 
 border-radius:50%;
 
+
 background:
-conic-gradient(
-transparent,
-#550000,
-transparent,
-#110000
+
+radial-gradient(
+circle,
+transparent 40%,
+#240000,
+transparent 70%
 );
 
-filter:blur(35px);
 
-animation:spin 10s linear infinite;
+filter:blur(30px);
+
+animation:rotate 12s linear infinite;
 
 }
 
 
-
-@keyframes spin{
+@keyframes rotate{
 
 to{
 transform:rotate(360deg);
@@ -139,146 +156,358 @@ transform:rotate(360deg);
 
 
 
-/* oeil */
+/* OEIL REALISTE */
+
 
 .eye{
 
-width:240px;
-height:240px;
+
+width:260px;
+height:260px;
+
 
 border-radius:50%;
 
+
 position:relative;
 
+
 background:
+
+
+radial-gradient(circle at 35% 30%,
+
+rgba(255,255,255,.8) 0%,
+
+transparent 8%),
+
 
 radial-gradient(circle,
 
 #000 0%,
-#000 18%,
-#1b0000 35%,
-#7a0000 55%,
-#220000 75%,
-#000 100%);
+
+#050505 18%,
+
+#2b0000 30%,
+
+#850000 45%,
+
+#3a0000 65%,
+
+#050000 100%);
+
 
 
 box-shadow:
 
-0 0 40px red,
-0 0 120px #550000,
-0 0 200px black;
+
+inset 0 0 40px black,
+
+0 0 60px #500000,
+
+0 0 150px black;
 
 
-transition:.5s;
 
-animation:pulse 4s infinite;
+transition:.6s;
+
+
+animation:breath 5s infinite;
+
+overflow:hidden;
 
 }
 
 
 
-@keyframes pulse{
+
+@keyframes breath{
 
 50%{
-transform:scale(1.05);
-}
+
+transform:scale(1.04);
 
 }
 
+}
+
+
+
+
+/* reflet oeil */
+
+
+.eye:before{
+
+
+content:"";
+
+
+position:absolute;
+
+width:80px;
+height:80px;
+
+
+background:
+
+radial-gradient(circle,
+white,
+transparent);
+
+
+opacity:.25;
+
+
+top:35px;
+left:45px;
+
+
+border-radius:50%;
+
+}
+
+
+
+
+
+/* iris */
+
+
+.eye:after{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:25px;
+
+
+border-radius:50%;
+
+
+background:
+
+repeating-conic-gradient(
+
+#ff3300 0deg,
+
+#300000 10deg,
+
+#ff0000 20deg
+
+);
+
+
+
+opacity:.25;
+
+
+}
 
 
 
 
 /* pupille */
 
+
 .pupil{
+
 
 position:absolute;
 
-width:70px;
-height:70px;
+
+z-index:5;
+
+
+width:75px;
+
+height:75px;
+
 
 background:#000;
+
 
 border-radius:50%;
 
 
 left:50%;
+
 top:50%;
 
 
 transform:translate(-50%,-50%);
 
+
 box-shadow:
-0 0 35px black;
+
+0 0 50px black;
+
 
 
 }
+
+
 
 
 .pupil:after{
 
+
 content:"";
+
 
 position:absolute;
 
-width:15px;
-height:15px;
+
+width:18px;
+
+height:18px;
+
 
 background:white;
 
+
 border-radius:50%;
 
+
 top:15px;
+
 left:18px;
+
 
 }
 
 
 
 
-/* textes verity */
+
+/* VERITY */
 
 
 .verity{
 
+
 position:absolute;
 
-color:#888;
 
-font-size:24px;
+color:#999;
 
-letter-spacing:6px;
 
-transition:.4s;
+font-size:30px;
+
+
+letter-spacing:12px;
+
 
 cursor:pointer;
 
+
+font-weight:bold;
+
+
+opacity:.7;
+
+
+transition:.5s;
+
+
 text-shadow:
-0 0 15px black;
+
+
+0 0 5px #000,
+
+0 0 20px #550000;
+
+
+
+animation:flicker 4s infinite;
+
 
 
 }
+
+
+
+@keyframes flicker{
+
+
+0%,100%{
+
+opacity:.7;
+
+}
+
+
+50%{
+
+opacity:1;
+
+}
+
+
+}
+
+
 
 
 
 .verity:hover{
 
-color:red;
+
+color:#ff0000;
+
+
+opacity:1;
+
 
 text-shadow:
 
-0 0 20px red,
-0 0 50px red;
+
+0 0 10px red,
+
+0 0 40px red,
+
+0 0 80px red;
+
 
 }
 
 
 
 
-.v1{
+.left{
 
-left:15%;
+left:12%;
+
+}
+
+
+.right{
+
+right:12%;
+
+}
+
+
+.top{
+
+top:25%;
+
+}
+
+
+.bottom{
+
+bottom:25%;
+
+}
+
+
+
+.center{
 
 top:50%;
 
@@ -288,116 +517,98 @@ transform:translateY(-50%);
 
 
 
-.v2{
 
-right:15%;
-
-top:50%;
-
-transform:translateY(-50%);
-
-}
+/* peur */
 
 
-
-.v3{
-
-top:20%;
-
-left:50%;
-
-transform:translateX(-50%);
-
-}
+.scared{
 
 
-
-.v4{
-
-bottom:20%;
-
-left:50%;
-
-transform:translateX(-50%);
-
-}
+transform:scale(.75);
 
 
+filter:
 
+brightness(1.8)
 
-
-/* réaction */
-
-
-.redEye{
-
-transform:scale(.7);
-
-background:
-
-radial-gradient(circle,
-
-black,
-red,
-#ff0000,
-black)!important;
+contrast(1.5);
 
 
 box-shadow:
 
-0 0 100px red,
-0 0 200px red!important;
+
+0 0 120px red,
+
+0 0 250px red!important;
+
 
 }
 
 
 
 
-
-/* écran final */
+/* final */
 
 
 #screen{
+
 
 position:absolute;
 
 inset:0;
 
+
 background:
 
 linear-gradient(
+
 white,
+
 #ddd
+
 );
 
+
 opacity:0;
+
 
 display:flex;
 
 align-items:center;
+
 justify-content:center;
+
 
 transition:5s;
 
-pointer-events:none;
 
 }
+
+
 
 
 #code{
 
-font-size:25px;
 
-letter-spacing:8px;
+font-family:monospace;
+
+
+font-size:24px;
+
+
+letter-spacing:10px;
+
+
+color:#000;
+
 
 opacity:0;
 
-color:black;
 
 transition:3s;
 
-}
 
+}
 
 
 
@@ -406,6 +617,7 @@ transition:3s;
 opacity:1!important;
 
 }
+
 
 
 </style>
@@ -417,37 +629,39 @@ opacity:1!important;
 <body>
 
 
+<div class="shadow"></div>
 
 <div class="vortex"></div>
 
 
 
-<div class="verity v1"
-onmouseenter="danger(true)"
-onmouseleave="danger(false)">
+<div class="verity left center"
+onmouseenter="fear(1)"
+onmouseleave="fear(0)">
 VERITY
 </div>
 
 
-<div class="verity v2"
-onmouseenter="danger(true)"
-onmouseleave="danger(false)">
+<div class="verity right center"
+onmouseenter="fear(1)"
+onmouseleave="fear(0)">
 VERITY
 </div>
 
 
-<div class="verity v3"
-onmouseenter="danger(true)"
-onmouseleave="danger(false)">
+<div class="verity top"
+onmouseenter="fear(1)"
+onmouseleave="fear(0)">
 VERITY
 </div>
 
 
-<div class="verity v4"
-onmouseenter="danger(true)"
-onmouseleave="danger(false)">
+<div class="verity bottom"
+onmouseenter="fear(1)"
+onmouseleave="fear(0)">
 VERITY
 </div>
+
 
 
 
@@ -457,6 +671,7 @@ VERITY
 <div class="pupil"></div>
 
 </div>
+
 
 
 
@@ -472,22 +687,26 @@ F2dYwGvJ8y6pN7mXQ3tK9vL4sA8rP6zE5cW1hB9uD7oV3
 
 
 
-
 <script>
 
 
-// particules
-
-for(let i=0;i<120;i++){
+for(let i=0;i<80;i++){
 
 let p=document.createElement("div");
 
-p.className="particle";
+p.style.position="absolute";
+
+p.style.width="2px";
+
+p.style.height="2px";
+
+p.style.background="#550000";
 
 p.style.left=Math.random()*100+"%";
 
-p.style.animationDuration=
-(3+Math.random()*8)+"s";
+p.style.top=Math.random()*100+"%";
+
+p.style.opacity=Math.random();
 
 document.body.appendChild(p);
 
@@ -496,23 +715,20 @@ document.body.appendChild(p);
 
 
 
-
-// oeil suit souris
-
 document.addEventListener("mousemove",e=>{
 
 
-let pupil=document.querySelector(".pupil");
+let p=document.querySelector(".pupil");
 
 
-let x=(e.clientX/window.innerWidth-.5)*40;
+let x=(e.clientX/window.innerWidth-.5)*45;
 
-let y=(e.clientY/window.innerHeight-.5)*40;
+let y=(e.clientY/window.innerHeight-.5)*45;
 
 
-pupil.style.marginLeft=x+"px";
+p.style.marginLeft=x+"px";
 
-pupil.style.marginTop=y+"px";
+p.style.marginTop=y+"px";
 
 
 });
@@ -521,27 +737,30 @@ pupil.style.marginTop=y+"px";
 
 
 
-function danger(x){
+function fear(x){
 
 let eye=document.querySelector(".eye");
 
+
 if(x){
 
-eye.classList.add("redEye");
+eye.classList.add("scared");
 
-}else{
+}
 
-eye.classList.remove("redEye");
+else{
+
+eye.classList.remove("scared");
 
 }
 
 }
-
 
 
 
 
 function openEye(){
+
 
 document.getElementById("screen")
 .classList.add("show");
