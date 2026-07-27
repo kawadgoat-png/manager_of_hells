@@ -8,6 +8,79 @@
 
 
 <style>
+   /* =========================
+   PARTICULES FIN
+========================= */
+
+.finalParticle{
+
+position:absolute;
+
+width:5px;
+height:5px;
+
+border-radius:50%;
+
+background:#000;
+
+opacity:0;
+
+z-index:150;
+
+animation:finalRise 5s infinite;
+
+}
+
+
+@keyframes finalRise{
+
+
+0%{
+
+transform:
+translateY(100vh)
+scale(.5);
+
+opacity:0;
+
+}
+
+
+
+20%{
+
+opacity:.8;
+
+}
+
+
+
+100%{
+
+transform:
+translateY(-100vh)
+scale(2);
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+/* particules rouges rares */
+
+.finalBlood{
+
+background:#900000;
+
+box-shadow:
+0 0 15px red,
+0 0 30px red;
+
+}
 
 *{
 margin:0;
@@ -1292,3 +1365,447 @@ VERITY
 
 
 </div>
+<script>
+
+
+/* =========================
+   GENERATION DES PARTICULES
+========================= */
+
+
+function createParticles(type, amount){
+
+
+for(let i=0;i<amount;i++){
+
+
+let p=document.createElement("div");
+
+
+p.className="particle "+type;
+
+
+
+let size =
+Math.random()*6+2;
+
+
+p.style.width=size+"px";
+
+p.style.height=size+"px";
+
+
+
+p.style.left=
+Math.random()*100+"%";
+
+
+
+p.style.top=
+Math.random()*100+"%";
+
+
+
+p.style.animationDuration=
+(3+Math.random()*12)+"s";
+
+
+
+p.style.animationDelay=
+Math.random()*8+"s";
+
+
+
+p.style.opacity=
+Math.random();
+
+
+
+document.body.appendChild(p);
+
+
+
+}
+
+
+}
+
+
+
+// énormément de particules
+
+createParticles("ash",180);
+
+createParticles("blood",70);
+
+createParticles("spark",40);
+
+
+
+
+
+
+
+
+/* =========================
+   OEIL SUIT LE CURSEUR
+========================= */
+
+
+document.addEventListener("mousemove",e=>{
+
+
+let pupil=document.querySelector(".pupil");
+
+let eye=document.querySelector(".eye");
+
+
+let rect=
+eye.getBoundingClientRect();
+
+
+
+let centerX=
+rect.left + rect.width/2;
+
+
+let centerY=
+rect.top + rect.height/2;
+
+
+
+let mouseX=
+e.clientX-centerX;
+
+
+let mouseY=
+e.clientY-centerY;
+
+
+
+let distance=
+Math.sqrt(
+mouseX*mouseX+
+mouseY*mouseY
+);
+
+
+
+let maxMove=45;
+
+
+
+let moveX=
+(mouseX/distance)*maxMove;
+
+
+let moveY=
+(mouseY/distance)*maxMove;
+
+
+
+if(distance < maxMove){
+
+moveX=mouseX;
+
+moveY=mouseY;
+
+}
+
+
+
+
+pupil.style.transform=
+`
+translate(
+calc(-50% + ${moveX}px),
+calc(-50% + ${moveY}px)
+)
+`;
+
+
+
+});
+
+
+
+
+
+
+
+
+/* =========================
+   SYSTEM VERITY
+========================= */
+
+
+let verityDestroyed=0;
+
+
+
+
+function activateVerity(element){
+
+
+
+// empêcher deuxième clic
+
+if(
+element.classList.contains("broken")
+){
+
+return;
+
+}
+
+
+
+element.classList.add("broken");
+
+
+
+verityDestroyed++;
+
+
+
+
+
+
+/* explosion */
+
+
+let rect=
+element.getBoundingClientRect();
+
+
+
+for(let i=0;i<15;i++){
+
+
+let shard=
+document.createElement("div");
+
+
+
+shard.className="shard";
+
+
+
+shard.innerHTML="VERITY";
+
+
+
+shard.style.left=
+(rect.left+rect.width/2)+"px";
+
+
+
+shard.style.top=
+(rect.top+rect.height/2)+"px";
+
+
+
+
+shard.style.setProperty(
+"--x",
+Math.random()
+);
+
+
+
+shard.style.setProperty(
+"--y",
+Math.random()
+);
+
+
+
+document.body.appendChild(shard);
+
+
+
+setTimeout(()=>{
+
+shard.remove();
+
+},1000);
+
+
+
+}
+
+
+
+
+
+
+/* réaction œil */
+
+
+let eye=
+document.querySelector(".eye");
+
+
+
+eye.classList.add("scared");
+
+
+
+setTimeout(()=>{
+
+
+eye.classList.remove("scared");
+
+
+},800);
+
+
+
+
+
+
+
+// les 4 verity sont trouvés
+
+
+if(verityDestroyed===4){
+
+
+
+setTimeout(()=>{
+
+
+function unlock(){
+
+
+let screen =
+document.getElementById("screen");
+
+
+screen.classList.add("show");
+
+
+
+// création des particules de fin
+
+for(let i=0;i<180;i++){
+
+
+let p=document.createElement("div");
+
+
+p.className="finalParticle";
+
+
+
+if(Math.random() > 0.7){
+
+p.classList.add("finalBlood");
+
+}
+
+
+
+p.style.left=
+Math.random()*100+"%";
+
+
+
+p.style.animationDelay=
+Math.random()*5+"s";
+
+
+
+p.style.animationDuration=
+(3+Math.random()*7)+"s";
+
+
+
+document.body.appendChild(p);
+
+
+}
+
+
+
+
+
+setTimeout(()=>{
+
+
+document
+.getElementById("code")
+.classList.add("show");
+
+
+
+},5000);
+
+
+
+}
+
+
+},1500);
+
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   FIN
+========================= */
+
+
+function unlock(){
+
+
+
+let screen=
+document.getElementById("screen");
+
+
+
+screen.classList.add("show");
+
+
+
+
+
+setTimeout(()=>{
+
+
+document
+.getElementById("code")
+.classList.add("show");
+
+
+
+},5000);
+
+
+
+}
+
+
+
+
+
+</script>
+
+
+</body>
+
+</html>
